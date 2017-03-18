@@ -1,0 +1,14 @@
+// тестировалось на icecast2 v2.4.0
+
+<?php
+$fl = file_get_contents('http://IP:PORT/'); // адрес сервера icecast2
+
+if (preg_match('#<td>Stream Description\:<\/td><td>(.*)<\/td>#Ui',$fl,$m)) {
+$dj = $m[1];
+	
+echo "За пультом: {$dj}"; // отображается на сайте
+} else {
+	
+echo "За пультом: Никого нет"; // выводим, если значение $dj пустое
+}
+?>
