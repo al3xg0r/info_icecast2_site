@@ -1,0 +1,21 @@
+// тестировалось на icecast2 v2.4.0
+
+<?php   
+// получаем с первого адреса
+$song = load_songname('http://IP:PORT/status.xsl?mount=/name'); // name - название потока
+if (!$song)  // по первому адресу песни нет, получаем со второго адреса
+$song = load_songname('http://IP:PORT/status.xsl?mount=/name'); // name - название потока
+// выводим песню
+if ($song)
+echo "Сейчас в эфире: {$song}";
+else
+echo "Сейчас в эфире: Offline";
+     
+function load_songname($url) // получает название песни c $url
+     {
+$fl = file_get_contents($url);
+if (preg_match('#<td>Currently playing:</td><td class="streamstats">(.*)</td>#Ui', $fl, $m))
+return $m[1];
+return false;
+}
+?>
