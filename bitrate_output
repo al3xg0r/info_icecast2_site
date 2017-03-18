@@ -1,12 +1,14 @@
+// тестировалось на icecast2 v2.4.0
+
 <?php
-$fl = file_get_contents('http://IP:PORT/'); 
+$fl = file_get_contents('http://IP:PORT/'); // адрес сервера icecast2
 
 if (preg_match('#<td>Bitrate\:<\/td><td class=\"streamstats\">(.*)<\/td>#Ui',$fl,$m)) {
 $bit = $m[1];
 	
-echo "Качество: {$bit} kbps"; 
+echo "Качество: {$bit} kbps"; // отображается на сайте
 } else {
 	
-echo "Качество: 128 kbps";
+echo "Качество: 128 kbps"; // выводим, если значение $bit пустое
 }
 ?>
