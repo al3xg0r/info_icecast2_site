@@ -1,0 +1,12 @@
+<?php
+$fl = file_get_contents('http://IP:PORT/'); 
+
+if (preg_match('#<td>Bitrate\:<\/td><td class=\"streamstats\">(.*)<\/td>#Ui',$fl,$m)) {
+$bit = $m[1];
+	
+echo "Качество: {$bit} kbps"; 
+} else {
+	
+echo "Качество: 128 kbps";
+}
+?>
