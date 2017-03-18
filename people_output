@@ -1,0 +1,20 @@
+// тестировалось на icecast2 v2.4.0
+
+<?php   
+// получаем с первого адреса
+$people = load_listeners('http://IP:PORT/status.xsl?mount=/name'); // name - название потока
+if (!$people)  // по первому адресу слушателей 0 (ноль), получаем со второго адреса
+$people = load_listeners('http://IP:PORT/status.xsl?mount=/name'); // name - название потока
+// выводим слушателей
+if ($people)
+echo "Слушателей: {$people}";
+else
+echo "Слушателей: Нет";  
+function load_listeners($url) // получает количество слушателей c $url
+     {
+$fl = file_get_contents($url);
+if (preg_match('#<td>Listeners \(current\)\:<\/td><td class="streamstats">(.*)<\/td>#Ui', $fl, $m))
+return (int)$m[1];
+return false;
+     }
+?>
